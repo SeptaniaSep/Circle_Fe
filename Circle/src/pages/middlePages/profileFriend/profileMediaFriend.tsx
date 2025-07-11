@@ -4,7 +4,6 @@ import { useFriendThreads } from "@/components/hooks/profileFriend/useAuthGetThr
 export default function MediaFr() {
   const { username } = useParams<{ username: string }>();
   const { data: threads, isLoading, error } = useFriendThreads(username!);
-  const imageBaseUrl = import.meta.env.VITE_IMAGE_BASE_URL;
 
   if (isLoading)
     return <p className="text-center text-gray-200">Loading...</p>;

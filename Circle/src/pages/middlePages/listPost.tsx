@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useGetThreads } from "@/components/hooks/useAuthGetThread";
 import type { typeThread } from "@/components/schemas/schemaAuthThread";
 import { ThreadItem } from "./threadItems";

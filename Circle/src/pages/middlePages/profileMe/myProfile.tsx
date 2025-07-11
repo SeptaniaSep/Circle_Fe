@@ -16,7 +16,6 @@ export function MyProfilePage() {
   const navigate = useNavigate();
   const location = useLocation();
   const activeTab = location.pathname.includes("/Media") ? "Media" : "AllPost";
-  const imageBaseUrl = import.meta.env.VITE_BACKEND_URL || "";
   const { data: profile } = useGetProfile();
 
   const [isModalOpen, setIsModalOpen] = useState(false);

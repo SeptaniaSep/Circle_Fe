@@ -17,7 +17,6 @@ export function CreatePost() {
   const [text, setText] = useState("");
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
-  const profileBaseUrl = import.meta.env.VITE_BACKEND_URL || "";
 
   const { mutate: createThread, isPending } = useCreateThread();
   const { data: profile } = useGetProfile();
@@ -54,7 +53,6 @@ export function CreatePost() {
     setOpen(false);
   };
 
-  const user = profile?.data;
 
   return (
     <>

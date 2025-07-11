@@ -27,7 +27,6 @@ interface EditProfileModalProps {
 export function EditProfileModal({ open, onClose }: EditProfileModalProps) {
   const { data: profile } = useGetProfile();
   const { mutate, isPending } = useUpdateProfile();
-  const profileBaseUrl = import.meta.env.VITE_BACKEND_URL || "";
 
   const [username, setUsername] = useState("");
   const [fullname, setFullname] = useState("");
@@ -42,15 +41,11 @@ export function EditProfileModal({ open, onClose }: EditProfileModalProps) {
     "/default-banner.jpg"
   );
 
-  // Isi form dengan data awal saat modal dibuka
   useEffect(() => {
     if (open && profile?.data) {
       setUsername(profile.data.username || "");
       setFullname(profile.data.fullname || "");
       setBio(profile.data.bio || "");
-
-      // setAvatarPreview(profile.data.avatar ?? "/default-avatar.png");
-      // setBannerPreview(profile.data.banner ?? "/default-banner.jpg");
 
       setAvatarPreview(
         profile?.data.avatar
@@ -63,7 +58,7 @@ export function EditProfileModal({ open, onClose }: EditProfileModalProps) {
           : "/default-banner.jpg"
       );
 
-      setAvatarFile(null); // reset upload file
+      setAvatarFile(null); 
       setBannerFile(null);
     }
   }, [open, profile]);

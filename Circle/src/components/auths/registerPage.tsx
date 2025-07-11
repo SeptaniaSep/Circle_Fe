@@ -2,13 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
-import {
-  schemaAuthRegister,
-  type schemaAutRegisterhDTO,
-} from "../schemas/schemaAuthRegister";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { api } from "@/lib/api";
+import { schemaAuthRegister, type schemaAuthRegisterDTO } from "../schemas/schemaAuthRegister";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -17,12 +14,12 @@ export default function RegisterPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<schemaAutRegisterhDTO>({
+  } = useForm<schemaAuthRegisterDTO>({
     mode: "onChange",
     resolver: zodResolver(schemaAuthRegister),
   });
 
-  const handleRegister = async (data: schemaAutRegisterhDTO) => {
+  const handleRegister = async (data: schemaAuthRegisterDTO) => {
     try {
       console.log(data);
       const res = await api.post("/register", data);

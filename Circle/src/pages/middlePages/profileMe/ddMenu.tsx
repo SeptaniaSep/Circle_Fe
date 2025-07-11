@@ -1,17 +1,13 @@
 import { useGetThreadsByAuthorId } from "@/components/hooks/useAuthGetThread";
 import { useDeleteThread } from "@/components/hooks/useAuthDeleteThread";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
-import { DDMenu } from "@/components/features/dropDown";
-import { Avatar, AvatarFallback, AvatarImage, avatarInitial } from "@/components/ui/avatar";
 import { useState } from "react";
 import { PostItem } from "./postItem";
 
 export function AllPost() {
   const { data, isLoading, error, refetch } = useGetThreadsByAuthorId();
   const deleteThread = useDeleteThread();
-  const navigate = useNavigate();
 
   const [openModal, setOpenModal] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);

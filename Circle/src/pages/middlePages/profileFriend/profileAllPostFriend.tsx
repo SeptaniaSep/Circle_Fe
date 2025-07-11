@@ -44,8 +44,6 @@ export function AllPostFr() {
 
 function ThreadItem({
   thread,
-  imageBaseUrl,
-  profileBaseUrl,
   navigate,
 }: {
   thread: any;

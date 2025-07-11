@@ -19,7 +19,6 @@ export function FormPost() {
 
   const { mutate: createThread, isPending } = useCreateThread();
   const { data: profile } = useGetProfile();
-  const profileBaseUrl = import.meta.env.VITE_BACKEND_URL || "";
 
   const handlePost = () => {
     if (!text.trim()) {
