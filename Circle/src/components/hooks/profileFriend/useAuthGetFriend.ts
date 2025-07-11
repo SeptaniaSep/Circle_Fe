@@ -5,11 +5,11 @@ interface UserProfile {
   id: string;
   username: string;
   profile: {
-    fullname: string | null;
-    avatar: string | null;
-    banner: string | null;
-    bio: string | null;
-  } | null;
+    fullname: string | null | undefined;
+    avatar: string | null | undefined;
+    banner: string | null | undefined;
+    bio: string | null | undefined;
+  } | null | undefined;
   followers: number;
   following: number;
   isFollowed?: boolean; 

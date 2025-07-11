@@ -12,13 +12,13 @@ export type schemaAuthThreadDTO = z.infer<typeof schemaAuthThread>;
 
 export interface formData {
   description: string,
-  image: File | null,
+  image: File | null | undefined;
 }
 
 export interface typeThread {
     id: string;
   description: string;       
-  image?: string | null;     
+  image?: string | null | undefined;     
   createdAt: string;        
   author : typeAuthor;
   _count?: {
