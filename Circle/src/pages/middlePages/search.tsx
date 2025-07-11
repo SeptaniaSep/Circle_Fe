@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import { LucideUserRoundSearch } from "lucide-react";
 import { useGetAllUser } from "@/components/hooks/useGetAllUser";
 import { FollowToggleButton } from "@/components/features/follow";
@@ -11,7 +10,6 @@ export function SearchPage() {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const { data: search, isLoading, isError, error } = useGetAllUser();
-  const profileBaseUrl = import.meta.env.VITE_BACKEND_URL || "";
 
   const filteredUsers =
     search?.data?.filter(

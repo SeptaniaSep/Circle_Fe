@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { GetAllUserTypeArray, typeProfilePayload } from "../schemas/schemaAuthProfile";
+import type { GetAllUserTypeArray } from "../schemas/schemaAuthProfile";
 import Cookies from "js-cookie";
 import { api } from "@/lib/api";
 

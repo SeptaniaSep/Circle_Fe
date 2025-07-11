@@ -17,7 +17,6 @@ export function CreatePost() {
   const [text, setText] = useState("");
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
-
   const { mutate: createThread, isPending } = useCreateThread();
   const { data: profile } = useGetProfile();
 

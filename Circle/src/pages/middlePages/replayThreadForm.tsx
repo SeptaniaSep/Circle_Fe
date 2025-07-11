@@ -7,7 +7,6 @@ import {
   avatarInitial,
 } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { ImagePlus } from "lucide-react";
 import { useState } from "react";
 
 interface Props {
@@ -16,7 +15,6 @@ interface Props {
 
 export function ReplayForm({ parentId }: Props) {
   const { data: replay } = useGetProfile();
-  const profileBaseUrl = import.meta.env.VITE_BACKEND_URL || "";
   const { mutate: reply, isPending } = useCreateReply(parentId);
   const [text, setText] = useState("");
   const handleSubmit = (e: React.FormEvent) => {

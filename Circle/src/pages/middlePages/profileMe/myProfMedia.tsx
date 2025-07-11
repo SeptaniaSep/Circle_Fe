@@ -2,7 +2,6 @@ import { useGetThreadsByAuthorId } from "@/components/hooks/useAuthGetThread";
 
 export default function Media() {
   const { data, isLoading, error } = useGetThreadsByAuthorId();
-  const imageBaseUrl = import.meta.env.VITE_IMAGE_BASE_URL;
   
   if (isLoading)
     return <p className="text-center  text-gray-200">Loading...</p>;

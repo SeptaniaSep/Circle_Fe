@@ -10,17 +10,6 @@ type LoginResponse = {
   token: string
 }
 
-type MeResponse = {
-  id: string;
-  username: string;
-  profile: {
-    avatar: string | null;
-    fullname: string;
-    banner: string;
-    bio: string;
-  };
-};
-
 export function useLogin() {
   const navigate = useNavigate();
 

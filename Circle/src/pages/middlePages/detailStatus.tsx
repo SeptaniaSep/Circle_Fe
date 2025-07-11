@@ -27,14 +27,11 @@ import { useDeleteThread } from "@/components/hooks/useAuthDeleteThread";
 export function StatusPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const imageBaseUrl = import.meta.env.VITE_IMAGE_BASE_URL;
-  const profileBaseUrl = import.meta.env.VITE_BACKEND_URL || "";
 
   const {
     data: thread,
     isLoading,
     isError,
-    refetch,
   } = useGetThreadByIdThread(id || "");
 
   const deleteThread = useDeleteThread();
@@ -49,7 +46,7 @@ export function StatusPage() {
       onSuccess: () => {
         setOpenModal(false);
         setSelectedId(null);
-        navigate(-1); // kembali ke halaman sebelumnya
+        navigate(-1);
       },
     });
   };

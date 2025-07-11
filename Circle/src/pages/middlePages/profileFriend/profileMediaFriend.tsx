@@ -10,7 +10,6 @@ export default function MediaFr() {
   if (error)
     return <p className="text-center text-gray-200">{error.message}</p>;
 
-  // Filter hanya thread yang ada image-nya
   const threadsWithImages = threads?.filter((thread) => !!thread.image);
 
   if (!threadsWithImages || threadsWithImages.length === 0)

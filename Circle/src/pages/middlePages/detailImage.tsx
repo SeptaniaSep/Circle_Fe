@@ -1,12 +1,9 @@
-import { useState } from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { FcLike } from "react-icons/fc";
 import { MessageSquareText } from "lucide-react";
 
 export function ImageDetailPage() {
-  const [comment, setComment] = useState("");
   const imageBaseUrl = import.meta.env.VITE_IMAGE_BASE_URL;
   const username = "Drinks Archive";
   const fullname = "drinksarchive.in";
