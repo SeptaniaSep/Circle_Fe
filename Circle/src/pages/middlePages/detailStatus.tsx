@@ -41,8 +41,7 @@ export function StatusPage() {
     isLiked,
     handleLikeClick,
     isHovered,
-    setIsHovered,
-    isLoading: likeLoading,
+    setIsHovered
   } = useLike(id || "");
 
   const handleDelete = () => {
