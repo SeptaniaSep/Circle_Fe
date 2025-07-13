@@ -14,7 +14,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { DDMenu } from "@/components/features/dropDown";
+import { DDMenuDelet } from "@/components/features/dropDown";
 
 export function ReplayList({ parentId }: { parentId: string }) {
   const { data: replies, isLoading, refetch } = useGetReplies(parentId);
@@ -45,9 +45,7 @@ export function ReplayList({ parentId }: { parentId: string }) {
           className="flex gap-3 p-8 pl-15 pt-4 border-b border-gray-800 relative"
         >
           <Avatar>
-            <AvatarImage
-              src={item.author?.profile?.avatar}
-            />
+            <AvatarImage src={item.author?.profile?.avatar} />
             <AvatarFallback className="text-white text-sm">
               {avatarInitial(item.author.username)}
             </AvatarFallback>
@@ -58,7 +56,9 @@ export function ReplayList({ parentId }: { parentId: string }) {
               <p className="text-white font-semibold">
                 {item.author.profile?.fullname || item.author.username}
               </p>
-              <span className="text-gray-400 text-sm">@{item.author.username}</span>
+              <span className="text-gray-400 text-sm">
+                @{item.author.username}
+              </span>
               <p className="text-gray-700 text-sm">
                 · {new Date(item.createdAt).toLocaleDateString()}
               </p>
@@ -77,10 +77,7 @@ export function ReplayList({ parentId }: { parentId: string }) {
 
           {/* Dropdown untuk Edit/Delete */}
           <div onClick={(e) => e.stopPropagation()}>
-            <DDMenu
-              onEdit={() => {
-                console.log("Edit reply:", item.id);
-              }}
+            <DDMenuDelet
               onDelete={() => {
                 setSelectedReplyId(item.id);
                 setOpenModal(true);
@@ -100,10 +97,10 @@ export function ReplayList({ parentId }: { parentId: string }) {
             Yakin ingin menghapus reply ini?
           </p>
           <DialogFooter className="mt-4">
-            <Button variant="ghost" onClick={() => setOpenModal(false)}>
+            <Button variant="outline"  onClick={() => setOpenModal(false)}>
               Batal
             </Button>
-            <Button variant="destructive" onClick={handleDelete}>
+            <Button variant="outline" onClick={handleDelete}>
               Hapus
             </Button>
           </DialogFooter>

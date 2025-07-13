@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/avatar";
 import { MessageSquareText } from "lucide-react";
 import { FcLike } from "react-icons/fc";
+import { GoHeart } from "react-icons/go";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { ReplayForm } from "./replayThreadForm";
 import { useGetThreadByIdThread } from "@/components/hooks/useAuthGetThread";
@@ -22,23 +23,27 @@ import {
 import { Button } from "@/components/ui/button";
 import { DDMenu } from "@/components/features/dropDown";
 import { useDeleteThread } from "@/components/hooks/useAuthDeleteThread";
-
+import { useLike} from "@/components/features/like";
 
 export function StatusPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-
-  const {
-    data: thread,
-    isLoading,
-    isError,
-  } = useGetThreadByIdThread(id || "");
-
   const deleteThread = useDeleteThread();
+
+  const { data: thread, isLoading, isError } = useGetThreadByIdThread(id || "");
 
   const [openModal, setOpenModal] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [liked, setLiked] = useState(false);
+
+
+  const {
+    likeCount,
+    isLiked,
+    handleLikeClick,
+    isHovered,
+    setIsHovered,
+    isLoading: likeLoading,
+  } = useLike(id || "");
 
   const handleDelete = () => {
     if (!selectedId) return;
@@ -57,10 +62,6 @@ export function StatusPage() {
   if (!thread.author)
     return <p className="text-red-500">Author tidak ditemukan.</p>;
 
-  const handleLike = () => {
-    setLiked(!liked);
-  };
-
   return (
     <div className="flex flex-col flex-1 text-white min-h-screen">
       {/* Header */}
@@ -78,9 +79,7 @@ export function StatusPage() {
         <div className="flex gap-3">
           {thread.author.profile?.avatar && (
             <Avatar>
-              <AvatarImage
-                src={thread.author.profile.avatar}
-              />
+              <AvatarImage src={thread.author.profile.avatar} />
               <AvatarFallback className="w-full h-full flex items-center justify-center border border-gray-700 text-white text-sm">
                 {avatarInitial(thread.author.username)}
               </AvatarFallback>
@@ -112,12 +111,18 @@ export function StatusPage() {
             <div className="flex gap-5 mt-4 text-gray-400">
               <div
                 className={`flex gap-1 items-center cursor-pointer ${
-                  liked ? "text-pink-500" : "text-gray-400"
+                  isLiked ? "text-gray-500" : "text-gray-400"
                 }`}
-                onClick={handleLike}
+                onClick={handleLikeClick}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
               >
-                <FcLike size={20} />
-                <span>0</span>
+                {isLiked || isHovered ? (
+                  <FcLike size={20} />
+                ) : (
+                  <GoHeart size={20} />
+                )}
+                <span>{likeCount}</span>
               </div>
 
               <div className="flex gap-1 items-center">

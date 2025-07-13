@@ -1,4 +1,4 @@
-// src/components/post/PostItem.tsx
+// src/pages/middlePages/postItem.tsx
 import { FcLike } from "react-icons/fc";
 import { GoHeart } from "react-icons/go";
 import { MessageSquareText } from "lucide-react";
@@ -15,7 +15,14 @@ interface PostItemProps {
 
 export function PostItem({ thread, onDelete }: PostItemProps) {
   const navigate = useNavigate();
-  const { likeCount, isLiked, isHovered, setIsHovered, handleLikeClick } = useLike(thread.id);
+  const {
+    likeCount,
+    isLiked,
+    isHovered,
+    setIsHovered,
+    handleLikeClick,
+    isLoading,
+  } = useLike(thread.id);
 
   return (
     <div
@@ -50,8 +57,9 @@ export function PostItem({ thread, onDelete }: PostItemProps) {
           )}
 
           <div className="flex gap-6 mt-3 text-gray-500 text-sm">
-            <div
+            <button
               className="flex items-center gap-1"
+              disabled={isLoading}
               onClick={(e) => {
                 e.stopPropagation();
                 handleLikeClick();
@@ -61,7 +69,7 @@ export function PostItem({ thread, onDelete }: PostItemProps) {
             >
               {isHovered || isLiked ? <FcLike size={20} /> : <GoHeart size={20} />}
               <span>{likeCount}</span>
-            </div>
+            </button>
 
             <div className="flex items-center gap-1">
               <MessageSquareText size={18} />

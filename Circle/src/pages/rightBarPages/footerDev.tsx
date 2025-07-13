@@ -21,7 +21,7 @@ export function Footer() {
         </p>
         <p className="flex text-gray-500 gap-1 text-xs mt-1 items-center">
           Powered by
-          <img className="w-4" src="/src/assets/img/logo.png" /> DumbWays
+          <img className="w-4" src="/public/logo.png" /> DumbWays
           Indonesia • #1CodingBootcamp
         </p>
       </div>

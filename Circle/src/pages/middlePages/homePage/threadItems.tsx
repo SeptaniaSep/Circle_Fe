@@ -6,7 +6,15 @@ import { Avatar, AvatarFallback, AvatarImage, avatarInitial } from "@/components
 import { useLike } from "@/components/features/like";
 import type { typeThread } from "@/components/schemas/schemaAuthThread";
 
-export function ThreadItem({ thread }: { thread: typeThread }) {
+interface ThreadItemProps {
+  thread: typeThread & {
+    _count?: {
+      replies?: number;
+    };
+  };
+}
+
+export function ThreadItem({ thread }: ThreadItemProps) {
   const navigate = useNavigate();
   const {
     likeCount,
@@ -26,19 +34,19 @@ export function ThreadItem({ thread }: { thread: typeThread }) {
       onClick={handleClick}
     >
       <div className="flex gap-3 relative">
-        {/* AVATAR */}
+        {/* Avatar */}
         <Avatar>
           <AvatarImage
             className="rounded-full"
             src={thread.author.profile?.avatar || ""}
           />
-          <AvatarFallback className="w-full h-full flex items-center justify-center border border-gray-700 text-white text-sm">
+          <AvatarFallback className="text-white text-sm border border-gray-600">
             {avatarInitial(thread.author.username)}
           </AvatarFallback>
         </Avatar>
 
-        {/* THREAD CONTENT */}
-        <div className="grid">
+        {/* Thread Content */}
+        <div className="flex-1">
           <div className="flex gap-2 text-sm text-gray-600">
             <p className="font-semibold text-white">{thread.author.username}</p>
             <p className="text-gray-400">@{thread.author.profile?.fullname}</p>
@@ -58,7 +66,7 @@ export function ThreadItem({ thread }: { thread: typeThread }) {
           )}
 
           <div className="flex gap-6 mt-3 text-gray-500 text-sm">
-            {/* LIKE */}
+            {/* Like */}
             <div
               className="flex items-center gap-1"
               onClick={(e) => {
@@ -72,7 +80,7 @@ export function ThreadItem({ thread }: { thread: typeThread }) {
               <span>{likeCount}</span>
             </div>
 
-            {/* REPLIES */}
+            {/* Replies */}
             <div className="flex items-center gap-1">
               <MessageSquareText size={18} />
               <span>{thread._count?.replies ?? 0} Replies</span>
