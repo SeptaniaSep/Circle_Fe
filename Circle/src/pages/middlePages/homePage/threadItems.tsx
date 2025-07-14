@@ -2,7 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { FcLike } from "react-icons/fc";
 import { GoHeart } from "react-icons/go";
 import { MessageSquareText } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage, avatarInitial } from "@/components/ui/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  avatarInitial,
+} from "@/components/ui/avatar";
 import { useLike } from "@/components/features/like";
 import type { typeThread } from "@/components/schemas/schemaAuthThread";
 
@@ -16,13 +21,8 @@ interface ThreadItemProps {
 
 export function ThreadItem({ thread }: ThreadItemProps) {
   const navigate = useNavigate();
-  const {
-    likeCount,
-    isLiked,
-    isHovered,
-    setIsHovered,
-    handleLikeClick,
-  } = useLike(thread.id);
+  const { likeCount, isLiked, isHovered, setIsHovered, handleLikeClick } =
+    useLike(thread.id);
 
   const handleClick = () => {
     navigate(`/status/${thread.id}`);
@@ -76,15 +76,21 @@ export function ThreadItem({ thread }: ThreadItemProps) {
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              {isHovered || isLiked ? <FcLike size={20} /> : <GoHeart size={20} />}
+              {isHovered || isLiked ? (
+                <FcLike size={20} />
+              ) : (
+                <GoHeart size={20} />
+              )}
               <span>{likeCount}</span>
             </div>
 
             {/* Replies */}
-            <div className="flex items-center gap-1">
-              <MessageSquareText size={18} />
-              <span>{thread._count?.replies ?? 0} Replies</span>
-            </div>
+            {thread._count && (
+              <div className="flex items-center gap-1">
+                <MessageSquareText size={18} />
+                <span>{thread._count?.replies ?? 0}</span>
+              </div>
+            )}
           </div>
         </div>
       </div>

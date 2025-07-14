@@ -23,7 +23,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { DDMenu } from "@/components/features/dropDown";
 import { useDeleteThread } from "@/components/hooks/useAuthDeleteThread";
-import { useLike} from "@/components/features/like";
+import { useLike } from "@/components/features/like";
+
 
 export function StatusPage() {
   const { id } = useParams();
@@ -36,13 +37,8 @@ export function StatusPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
 
-  const {
-    likeCount,
-    isLiked,
-    handleLikeClick,
-    isHovered,
-    setIsHovered
-  } = useLike(id || "");
+  const { likeCount, isLiked, handleLikeClick, isHovered, setIsHovered } =
+    useLike(id || "");
 
   const handleDelete = () => {
     if (!selectedId) return;
@@ -54,6 +50,7 @@ export function StatusPage() {
       },
     });
   };
+
 
   if (isLoading) return <p className="text-white p-4">Loading...</p>;
   if (isError || !thread)
@@ -124,9 +121,14 @@ export function StatusPage() {
                 <span>{likeCount}</span>
               </div>
 
-              <div className="flex gap-1 items-center">
+              {thread._count && (
+                <div className="flex gap-1 items-center">
                 <MessageSquareText size={18} />
+                {thread._count?.replies ?? 0}
+                
               </div>
+              )}
+              
             </div>
           </div>
 

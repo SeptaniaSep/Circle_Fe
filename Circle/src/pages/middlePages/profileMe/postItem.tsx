@@ -3,7 +3,12 @@ import { FcLike } from "react-icons/fc";
 import { GoHeart } from "react-icons/go";
 import { MessageSquareText } from "lucide-react";
 import { useLike } from "@/components/features/like";
-import { Avatar, AvatarFallback, AvatarImage, avatarInitial } from "@/components/ui/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  avatarInitial,
+} from "@/components/ui/avatar";
 import { DDMenu } from "@/components/features/dropDown";
 import { useNavigate } from "react-router-dom";
 import type { typeThread } from "@/components/schemas/schemaAuthThread";
@@ -31,7 +36,10 @@ export function PostItem({ thread, onDelete }: PostItemProps) {
     >
       <div className="flex gap-3 relative">
         <Avatar>
-          <AvatarImage className="rounded-full" src={thread.author.profile.avatar || ""} />
+          <AvatarImage
+            className="rounded-full"
+            src={thread.author.profile.avatar || ""}
+          />
           <AvatarFallback className="text-gray-200">
             {avatarInitial(thread.author.username)}
           </AvatarFallback>
@@ -67,13 +75,17 @@ export function PostItem({ thread, onDelete }: PostItemProps) {
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              {isHovered || isLiked ? <FcLike size={20} /> : <GoHeart size={20} />}
+              {isHovered || isLiked ? (
+                <FcLike size={20} />
+              ) : (
+                <GoHeart size={20} />
+              )}
               <span>{likeCount}</span>
             </button>
 
             <div className="flex items-center gap-1">
               <MessageSquareText size={18} />
-              <span>{thread._count?.replies ?? 0} Replies</span>
+              <span>{thread._count?.replies ?? 0} </span>
             </div>
           </div>
         </div>
