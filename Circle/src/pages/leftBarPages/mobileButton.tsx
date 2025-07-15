@@ -1,6 +1,7 @@
-import { Home, Search, Heart, CircleUser } from "lucide-react";
+import { Home, Search, CircleUser } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useGetProfile } from "@/components/hooks/useAuthProfile";
+import { GoHeart } from "react-icons/go";
 
 export function MobileBottomBar() {
   const { data: profile } = useGetProfile();
@@ -28,7 +29,7 @@ export function MobileBottomBar() {
         to={`/follow/${userId}/followers`}
         className={pathname.startsWith("/follow") ? activeClass : inactiveClass}
       >
-        <Heart size={26} />
+        <GoHeart size={26} />
       </Link>
 
       <Link

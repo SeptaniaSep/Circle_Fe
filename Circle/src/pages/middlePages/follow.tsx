@@ -4,7 +4,7 @@ export function Follow() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const activeTab = location.pathname.includes("Follower")
+  const activeTab = location.pathname.includes("Followers")
     ? "Followers"
     : "Following";
 

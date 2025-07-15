@@ -32,77 +32,84 @@ export function MyProfilePage() {
         Profile
       </h1>
 
-      {/* Header & Profile */}
+      {/* Header & Banner */}
       <div className="m-6">
         {profile?.data.banner && (
           <AspectRatio ratio={6 / 1}>
             <img
               src={profile?.data.banner}
               alt={avatarInitial(profile?.data.username)}
-              className="rounded-2xl md:object-cover border-2 border-gray-900  w-full h-40"
+              className="rounded-2xl md:object-cover border-2 border-gray-900 w-full h-40"
             />
           </AspectRatio>
         )}
-        <div>
-          <div className="flex relative pl-4 pb-6">
-            {/* Avatar yang bisa diklik */}
-            {profile?.data.avatar && (
-              <Avatar
-                onClick={() => setIsModalOpen(true)}
-                className="w-24 h-24 rounded-full border-2 border-gray-900 absolute -top-1"
-              >
-                <AvatarImage
-                  src={profile?.data.avatar}
-                  alt="avatar"
-                  className="object-cover"
-                />
-                <AvatarFallback className="w-full h-full bg-[#0d120d] flex items-center justify-center text-white text-2xl">
-                  {avatarInitial(profile?.data.username)}
-                </AvatarFallback>
-              </Avatar>
-            )}
-            {/* Modal avatar muncul saat diklik */}
-            {profile?.data.avatar && (
-              <AvatarModal
-                open={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                avatarUrl={profile?.data.avatar}
-              />
-            )}
-          </div>
-        </div>
 
-        {/* BUTTON EDIT PROFILE */}
-        <div className="mt-10 flex justify-end">
-          <div>
-            {/* Button buat buka modal edit */}
+        {/* Avatar + Button */}
+        <div className="relative pl-4 pb-6">
+          {profile?.data.avatar && (
+            <Avatar
+              onClick={() => setIsModalOpen(true)}
+              className="w-24 h-24 rounded-full border-2 border-gray-900 absolute -top-14 md:-top-1"
+            >
+              <AvatarImage
+                src={profile?.data.avatar}
+                alt="avatar"
+                className="object-cover"
+              />
+              <AvatarFallback className="w-full h-full bg-[#0d120d] flex items-center justify-center text-white text-2xl">
+                {avatarInitial(profile?.data.username)}
+              </AvatarFallback>
+            </Avatar>
+          )}
+
+          {profile?.data.avatar && (
+            <AvatarModal
+              open={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+              avatarUrl={profile?.data.avatar}
+            />
+          )}
+
+          {/* Tombol Edit Mobile (di bawah avatar) */}
+          <div className="block md:hidden mt-30 ml-25">
             <button
               className="px-4 py-1 border border-gray-500 rounded-full text-sm"
               onClick={() => setIsEditOpen(true)}
             >
               Edit Profile
             </button>
-
-            {/* Modal Edit Profile */}
-            <EditProfileModal
-              open={isEditOpen}
-              onClose={() => setIsEditOpen(false)}
-              initialData={{
-                username: profile?.data.username || "",
-                fullname: profile?.data.fullname || "",
-                bio: profile?.data.bio || "",
-                avatar: profile?.data.avatar || null,
-                banner: profile?.data.banner || null,
-              }}
-            />
           </div>
         </div>
 
-        <div className="grid ml-4">
+        {/* Tombol Edit Desktop */}
+        <div className="hidden md:flex justify-end mt-9">
+          <button
+            className="px-4 py-1 border border-gray-500 rounded-full text-sm"
+            onClick={() => setIsEditOpen(true)}
+          >
+            Edit Profile
+          </button>
+        </div>
+
+        {/* Modal Edit */}
+        <EditProfileModal
+          open={isEditOpen}
+          onClose={() => setIsEditOpen(false)}
+          initialData={{
+            username: profile?.data.username || "",
+            fullname: profile?.data.fullname || "",
+            bio: profile?.data.bio || "",
+            avatar: profile?.data.avatar || null,
+            banner: profile?.data.banner || null,
+          }}
+        />
+
+        {/* Info User */}
+        <div className="grid ml-4 mt-1">
           <h1 className="text-xl font-semibold">{profile?.data.username}</h1>
           <p className="text-gray-400 font-sm">@{profile?.data.fullname}</p>
           <p className="text-sm">{profile?.data.bio}</p>
-          <div className="flex text-sm text-gray-400 gap-4">
+          <div className="flex text-sm text-gray-400 gap-4 mt-1">
             <span
               onClick={() => navigate(`/follow/${profile?.data.id}/following`)}
               className="flex font-bold text-white gap-1 cursor-pointer"
@@ -121,7 +128,7 @@ export function MyProfilePage() {
         </div>
       </div>
 
-      {/* Profile detail component */}
+      {/* Tab AllPost & Media */}
       <div>
         <div className="flex mt-4 border-b border-gray-700 text-sm font-semibold">
           <button
@@ -146,7 +153,6 @@ export function MyProfilePage() {
           </button>
         </div>
 
-        {/* Ini wajib untuk render komponen tab-nya */}
         <div className="mt-4">
           <Outlet />
         </div>

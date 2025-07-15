@@ -1,4 +1,3 @@
-// src/pages/middlePages/postItem.tsx
 import { FcLike } from "react-icons/fc";
 import { GoHeart } from "react-icons/go";
 import { MessageSquareText } from "lucide-react";
@@ -35,7 +34,7 @@ export function PostItem({ thread, onDelete }: PostItemProps) {
       onClick={() => navigate(`/status/${thread.id}`)}
     >
       <div className="flex gap-3 relative">
-        <Avatar>
+        <Avatar className="w-10 h-10 md:w-10 md:h-10">
           <AvatarImage
             className="rounded-full"
             src={thread.author.profile.avatar || ""}
@@ -46,20 +45,20 @@ export function PostItem({ thread, onDelete }: PostItemProps) {
         </Avatar>
 
         <div className="flex-1">
-          <div className="flex gap-2 text-sm text-gray-600">
+          <div className="flex flex-wrap md:gap-2 gap-x-1 text-xs md:text-sm text-gray-600">
             <p className="font-semibold text-white">{thread.author.username}</p>
             <p className="text-gray-400">@{thread.author.profile.fullname}</p>
-            <span>· {new Date(thread.createdAt).toLocaleString()}</span>
+            <span className="text-gray-500">· {new Date(thread.createdAt).toLocaleString()}</span>
           </div>
 
-          <p className="text-white text-sm mt-1">{thread.description}</p>
+          <p className="text-white text-xs md:text-sm mt-1">{thread.description}</p>
 
           {thread.image && (
             <div className="mt-2">
               <img
                 src={thread.image}
                 alt="image"
-                className="rounded-md object-cover max-w-xs h-auto"
+                className="rounded-md object-cover max-w-full md:max-w-xs h-auto"
               />
             </div>
           )}
@@ -76,16 +75,16 @@ export function PostItem({ thread, onDelete }: PostItemProps) {
               onMouseLeave={() => setIsHovered(false)}
             >
               {isHovered || isLiked ? (
-                <FcLike size={20} />
+                <FcLike size={18} className="md:size-5" />
               ) : (
-                <GoHeart size={20} />
+                <GoHeart size={18} className="md:size-5" />
               )}
-              <span>{likeCount}</span>
+              <span className="text-xs md:text-sm">{likeCount}</span>
             </button>
 
             <div className="flex items-center gap-1">
-              <MessageSquareText size={18} />
-              <span>{thread._count?.replies ?? 0} </span>
+              <MessageSquareText size={16} className="md:size-5" />
+              <span className="text-xs md:text-sm">{thread._count?.replies ?? 0}</span>
             </div>
           </div>
         </div>

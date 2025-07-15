@@ -21,7 +21,7 @@ export function MyProfile() {
         className="bg-[#333e35] p-4 rounded-lg"
         onClick={() => navigate("/profile")}
       >
-        <h2 className="text-xl font-bold pb-2">My Profile</h2>
+        <h2 className="text-xl font-bold pb-1">My Profile</h2>
 
         {/* Banner */}
         {profileData.banner && (

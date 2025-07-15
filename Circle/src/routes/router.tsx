@@ -114,9 +114,9 @@ const router = createBrowserRouter([
     Component: ResetPasswordPage,
   },
   {
-    path: "/detailImage",
+    path: "/media/:id",
     Component: ImageDetailPage,
-  },
+  }
 ]);
 
 export default router;

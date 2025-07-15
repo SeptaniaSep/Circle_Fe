@@ -8,6 +8,7 @@ export function ButtonLeftBar() {
   const { data: profile } = useGetProfile();
 
   const isActive = (path: string) => {
+    if (path === "/") return location.pathname === "/";
     return location.pathname.startsWith(path);
   };
 
@@ -22,7 +23,9 @@ export function ButtonLeftBar() {
       <nav className="grid gap-8 pl-5">
         <Link
           to="/"
-          className={`${baseClass} ${isActive("/") ? activeClass : inactiveClass}`}
+          className={`${baseClass} ${
+            isActive("/") ? activeClass : inactiveClass
+          }`}
         >
           <Home size={24} />
           Home
@@ -30,7 +33,9 @@ export function ButtonLeftBar() {
 
         <Link
           to="/search"
-          className={`${baseClass} ${isActive("/search") ? activeClass : inactiveClass}`}
+          className={`${baseClass} ${
+            isActive("/search") ? activeClass : inactiveClass
+          }`}
         >
           <UserRoundSearchIcon size={24} />
           Search
@@ -38,7 +43,9 @@ export function ButtonLeftBar() {
 
         <Link
           to={`/follow/${userId}/followers`}
-          className={`${baseClass} ${isActive("/follow") ? activeClass : inactiveClass}`}
+          className={`${baseClass} ${
+            isActive("/follow") ? activeClass : inactiveClass
+          }`}
         >
           <GoHeart size={24} />
           Follow
@@ -46,7 +53,9 @@ export function ButtonLeftBar() {
 
         <Link
           to="/profile"
-          className={`${baseClass} ${isActive("/profile") ? activeClass : inactiveClass}`}
+          className={`${baseClass} ${
+            isActive("/profile") ? activeClass : inactiveClass
+          }`}
         >
           <CircleUserIcon size={24} />
           Profile
