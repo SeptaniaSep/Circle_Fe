@@ -1,5 +1,4 @@
-// ImageDetailPage.tsx
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation} from "react-router-dom";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { FcLike } from "react-icons/fc";
@@ -7,7 +6,7 @@ import { MessageSquareText } from "lucide-react";
 
 export function ImageDetailPage() {
   const { state } = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const image = state?.image;
   const caption = state?.caption;
