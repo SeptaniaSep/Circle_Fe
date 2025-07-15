@@ -24,8 +24,9 @@ export function SearchPage() {
 
   return (
     <div>
+      {/* 🔍 Search bar */}
       <div className="search-bar sticky top-1 z-10 p-8 pb-0 bg-[#0d120d]">
-        <div className="flex items-center bg-[#292d2a] pl-4 p-1 rounded-full ">
+        <div className="flex items-center bg-[#292d2a] pl-4 p-1 rounded-full">
           <LucideUserRoundSearch className="text-gray-400" />
           <Input
             placeholder="Search your friend"
@@ -35,11 +36,12 @@ export function SearchPage() {
           />
         </div>
       </div>
+
+      {/* 🔍 Search results */}
       <div className="flex-1 px-6 pt-8 text-white">
         {query && filteredUsers.length === 0 && (
-          <p className="text-center text-gray-400 mt-10">
-            No results for “<strong>{query}</strong>”
-            <br />
+          <p className="text-center text-gray-400 mt-10 text-sm">
+            No results for “<strong>{query}</strong>”<br />
             Try searching for something else or check your spelling.
           </p>
         )}
@@ -52,31 +54,35 @@ export function SearchPage() {
                 className="flex items-center justify-between hover:bg-[#181d19] rounded-lg px-4 py-3"
               >
                 <div className="flex items-center gap-4">
-                  <Avatar className="w-12 h-12 border border-gray-400">
-                    <AvatarImage
-                      src={user.profile.avatar
-                      }
-                      alt={user.username}
-                    />
-                    <AvatarFallback>
+                  <Avatar className="w-10 h-10 border border-gray-400">
+                    <AvatarImage src={user.profile.avatar} alt={user.username} />
+                    <AvatarFallback className="text-xs">
                       {user.username.slice(0, 2).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
-                  <div onClick={() => navigate(`/profileFr/${user.username}`)}>
-                    <p className="font-semibold text-white">{user?.username}</p>
-                    <p className="text-sm text-gray-400">
+
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => navigate(`/profileFr/${user.username}`)}
+                  >
+                    <p className="text-sm font-medium text-white">
+                      {user?.username}
+                    </p>
+                    <p className="text-xs text-gray-400">
                       @{user?.profile?.fullname || ""}
                     </p>
                     {user?.profile?.bio && (
-                      <p className="text-sm text-gray-300">
+                      <p className="text-xs text-gray-300 line-clamp-2">
                         {user.profile.bio}
                       </p>
                     )}
                   </div>
                 </div>
 
-                {/* 🔁 Button follow/unfollow */}
-                <FollowToggleButton user={user} />
+                {/* 🔁 Responsive Follow/Unfollow Button */}
+                <div className="scale-90 md:scale-100">
+                  <FollowToggleButton user={user} />
+                </div>
               </div>
             ))}
           </div>
