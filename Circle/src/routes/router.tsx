@@ -18,6 +18,7 @@ import { ImageDetailPage } from "@/pages/middlePages/detailImage";
 import { AllPostFr } from "@/pages/middlePages/profileFriend/profileAllPostFriend";
 import MediaFr from "@/pages/middlePages/profileFriend/profileMediaFriend";
 import { StatusPage } from "@/pages/middlePages/detailStatus/detailStatus";
+import { StatusPageMe } from "@/pages/middlePages/profileMe/detailStatusMe";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
           {
             path: "status/:id",
             Component: StatusPage,
+          },
+          {
+            path: "statusme/:id",
+            Component: StatusPageMe,
           },
           {
             path: "profile/",

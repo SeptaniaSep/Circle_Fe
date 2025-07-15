@@ -31,7 +31,7 @@ export function PostItem({ thread, onDelete }: PostItemProps) {
   return (
     <div
       className="border-b border-gray-500 p-4 hover:bg-[#141414aa] cursor-pointer"
-      onClick={() => navigate(`/status/${thread.id}`)}
+      onClick={() => navigate(`/statusme/${thread.id}`)}
     >
       <div className="flex gap-3 relative">
         <Avatar className="w-10 h-10 md:w-10 md:h-10">

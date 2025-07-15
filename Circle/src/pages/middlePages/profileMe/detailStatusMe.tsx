@@ -11,18 +11,42 @@ import { GoHeart } from "react-icons/go";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { useGetThreadByIdThread } from "@/components/hooks/useAuthGetThread";
 import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { DDMenu } from "@/components/features/dropDown";
 import { useDeleteThread } from "@/components/hooks/useAuthDeleteThread";
 import { useLike } from "@/components/features/like";
-import { ReplayForm } from "./replayThreadForm";
-import { ReplayList } from "./replayList";
+import { ReplayList } from "../detailStatus/replayList";
+import { ReplayForm } from "../detailStatus/replayThreadForm";
 
-export function StatusPage() {
+export function StatusPageMe() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const deleteThread = useDeleteThread();
   const { data: thread, isLoading, isError } = useGetThreadByIdThread(id || "");
+
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const { likeCount, isLiked, handleLikeClick, isHovered, setIsHovered } =
     useLike(id || "");
+
+  const handleDelete = () => {
+    if (!selectedId) return;
+    deleteThread.mutate(selectedId, {
+      onSuccess: () => {
+        setOpenModal(false);
+        setSelectedId(null);
+        navigate(-1);
+      },
+    });
+  };
 
   if (isLoading) return <p className="text-white p-4">Loading...</p>;
   if (isError || !thread)
@@ -103,6 +127,17 @@ export function StatusPage() {
               )}
             </div>
           </div>
+
+          {/* Dropdown for delete */}
+          <div onClick={(e) => e.stopPropagation()}>
+            <DDMenu
+              onEdit={() => console.log("Edit thread")}
+              onDelete={() => {
+                setSelectedId(thread.id);
+                setOpenModal(true);
+              }}
+            />
+          </div>
         </div>
       </div>
 
@@ -111,6 +146,26 @@ export function StatusPage() {
 
       {/* Reply List */}
       <ReplayList parentId={thread.id} />
+
+      {/* Confirm Delete Modal */}
+      <Dialog open={openModal} onOpenChange={setOpenModal}>
+        <DialogContent className="bg-[#1e1e1e] text-white border border-gray-700">
+          <DialogHeader>
+            <DialogTitle>Hapus Postingan</DialogTitle>
+          </DialogHeader>
+          <p className="text-sm text-gray-300">
+            Yakin ingin menghapus postingan ini?
+          </p>
+          <DialogFooter className="mt-4">
+            <Button variant="ghost" onClick={() => setOpenModal(false)}>
+              Batal
+            </Button>
+            <Button variant="destructive" onClick={handleDelete}>
+              Hapus
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
