@@ -35,9 +35,9 @@ export function ThreadItem({ thread }: ThreadItemProps) {
     >
       <div className="flex gap-3 relative">
         {/* Avatar */}
-        <Avatar>
+        <Avatar className="w-10 h-10">
           <AvatarImage
-            className="rounded-full"
+            className="rounded-full object-cover"
             src={thread.author.profile?.avatar || ""}
           />
           <AvatarFallback className="text-white text-sm border border-gray-600">
@@ -46,25 +46,37 @@ export function ThreadItem({ thread }: ThreadItemProps) {
         </Avatar>
 
         {/* Thread Content */}
-        <div className="flex-1">
-          <div className="flex gap-2 text-sm text-gray-600">
-            <p className="font-semibold text-white">{thread.author.username}</p>
-            <p className="text-gray-400">@{thread.author.profile?.fullname}</p>
-            <span>· {new Date(thread.createdAt).toLocaleString()}</span>
+        <div className="flex-1 overflow-hidden">
+          {/* Username & Meta */}
+          <div className="flex flex-wrap items-center gap-1 text-sm text-gray-600">
+            <p className="font-semibold text-white truncate">
+              {thread.author.username}
+            </p>
+            <p className="text-gray-400 truncate">
+              @{thread.author.profile?.fullname}
+            </p>
+            <span className="text-gray-400">
+              · {new Date(thread.createdAt).toLocaleString()}
+            </span>
           </div>
 
-          <p className="text-white mt-1 text-sm">{thread.description}</p>
+          {/* Description */}
+          <p className="text-white mt-1 text-sm whitespace-pre-wrap break-words">
+            {thread.description}
+          </p>
 
+          {/* Image */}
           {thread.image && (
             <div className="mt-2">
               <img
                 src={thread.image}
-                alt="image"
-                className="rounded-md object-cover max-w-sm h-auto"
+                alt="thread"
+                className="rounded-md object-cover w-full max-w-xs md:max-w-sm max-h-[250px]"
               />
             </div>
           )}
 
+          {/* Action Buttons */}
           <div className="flex gap-6 mt-3 text-gray-500 text-sm">
             {/* Like */}
             <div

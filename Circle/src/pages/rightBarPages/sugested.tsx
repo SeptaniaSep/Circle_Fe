@@ -44,7 +44,7 @@ export function SugestedUser() {
   if (isError) return <p className="text-center text-gray-200">{error.message}</p>;
 
   return (
-    <div className="bg-[#333e35] p-4 rounded-lg mt-3">
+    <div className="bg-[#333e35] py-2 px-4 rounded-lg mt-3">
       <h2 className="font-semibold text-white">Suggested for you</h2>
 
       <div className="grid">
@@ -98,7 +98,7 @@ export function SugestedUser() {
           onClick={() => navigate("/search")}
           className="text-xl text-amber hover:text-gray-300 mt-2"
         >
-          See all
+          ...
         </button>
       )}
     </div>

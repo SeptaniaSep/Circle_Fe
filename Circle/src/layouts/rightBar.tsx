@@ -12,7 +12,7 @@ function RightBar() {
     location.pathname.startsWith("/profile/");
 
   return (
-    <div className="grid text-white p-4  fixed">
+    <div className="grid text-white p-4 fixed">
 
       {/* My Profile */} 
       {!isMyProfilePage && (

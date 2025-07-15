@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "@/layouts/layout";
-import { StatusPage } from "@/pages/middlePages/detailStatus";
 import RegisterPage from "@/components/auths/registerPage";
 import LoginPage from "@/components/auths/loginPage";
 import ForgotPage from "@/components/auths/forgotPage";
@@ -18,6 +17,7 @@ import { ProfileFrPage } from "@/pages/middlePages/profileFriend/profileFriend";
 import { ImageDetailPage } from "@/pages/middlePages/detailImage";
 import { AllPostFr } from "@/pages/middlePages/profileFriend/profileAllPostFriend";
 import MediaFr from "@/pages/middlePages/profileFriend/profileMediaFriend";
+import { StatusPage } from "@/pages/middlePages/detailStatus/detailStatus";
 
 const router = createBrowserRouter([
   {

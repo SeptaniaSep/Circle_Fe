@@ -30,7 +30,7 @@ export function ReplayList({ parentId }: { parentId: string }) {
       onSuccess: () => {
         setOpenModal(false);
         setSelectedReplyId(null);
-        refetch(); // refresh daftar reply
+        refetch();
       },
     });
   };
@@ -42,9 +42,9 @@ export function ReplayList({ parentId }: { parentId: string }) {
       {replies?.map((item: any) => (
         <div
           key={item.id}
-          className="flex gap-3 p-8 pl-15 pt-4 border-b border-gray-800 relative"
+          className="flex gap-2 md:gap-3 p-4 md:p-8 border-b border-gray-800 relative"
         >
-          <Avatar>
+          <Avatar className="w-10 h-10">
             <AvatarImage src={item.author?.profile?.avatar} />
             <AvatarFallback className="text-white text-sm">
               {avatarInitial(item.author.username)}
@@ -52,25 +52,25 @@ export function ReplayList({ parentId }: { parentId: string }) {
           </Avatar>
 
           <div className="flex-1">
-            <div className="flex gap-2 items-center flex-wrap text-sm">
+            <div className="flex flex-wrap gap-1 items-center text-sm md:text-base">
               <p className="text-white font-semibold">
                 {item.author.profile?.fullname || item.author.username}
               </p>
-              <span className="text-gray-400 text-sm">
-                @{item.author.username}
-              </span>
+              <span className="text-gray-400 text-sm">@{item.author.username}</span>
               <p className="text-gray-700 text-sm">
                 · {new Date(item.createdAt).toLocaleDateString()}
               </p>
             </div>
 
-            <p className="text-sm text-white mt-1">{item.description}</p>
+            <p className="text-white mt-1 text-sm md:text-base break-words whitespace-pre-wrap">
+              {item.description}
+            </p>
 
             {item.image && (
               <img
                 src={`${profileBaseUrl}/${item.image}`}
                 alt="reply image"
-                className="mt-2 rounded max-w-xs"
+                className="mt-2 rounded object-cover w-full max-w-[250px] md:max-w-xs h-auto"
               />
             )}
           </div>
@@ -97,7 +97,7 @@ export function ReplayList({ parentId }: { parentId: string }) {
             Yakin ingin menghapus reply ini?
           </p>
           <DialogFooter className="mt-4">
-            <Button variant="outline"  onClick={() => setOpenModal(false)}>
+            <Button variant="outline" onClick={() => setOpenModal(false)}>
               Batal
             </Button>
             <Button variant="outline" onClick={handleDelete}>
