@@ -9,12 +9,10 @@ import { MessageSquareText } from "lucide-react";
 import { FcLike } from "react-icons/fc";
 import { GoHeart } from "react-icons/go";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { useGetThreadByIdThread } from "@/components/hooks/useAuthGetThread";
-import { useState } from "react";
-import { useDeleteThread } from "@/components/hooks/useAuthDeleteThread";
 import { useLike } from "@/components/features/like";
 import { ReplayForm } from "./replayThreadForm";
 import { ReplayList } from "./replayList";
+import { useGetThreadByIdThread } from "@/components/hooks/useAuthGetThread";
 
 export function StatusPage() {
   const { id } = useParams();
